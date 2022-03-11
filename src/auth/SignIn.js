@@ -39,6 +39,11 @@ const Wrapper = styled(Paper)`
   }
 `;
 
+const initialForm = {
+  name: "admin@elsteam.com",
+  password: "test321",
+};
+
 const SignIn = () => {
   // Hooks.
   const navigate = useNavigate();
@@ -112,6 +117,10 @@ const SignIn = () => {
             values,
           }) => (
             <form noValidate onSubmit={handleSubmit}>
+              <Alert mt={3} mb={3} severity="info">
+                Use <strong className="red-color">{initialForm.name}</strong>{" "}
+                and <strong>{initialForm.password}</strong> to sign in
+              </Alert> 
               {errors?.submit && (
                 <Alert mt={2} mb={3} severity="warning">
                   {errors?.submit}
