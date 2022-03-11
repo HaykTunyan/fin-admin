@@ -1,0 +1,21 @@
+stages:
+  - build
+
+build:
+  only:
+    - develop
+  stage: build
+  before_script:
+    - cp .env.example .env
+  script:
+    - npm config set registry https://registry.npmjs.org/ 
+    - npm install
+    - CI=false npm run build
+    - tar -czf build.tar.gz build
+    - rm -rf /opt/admin/public
+    - mv build/ /opt/admin/public
+    - mv .env /opt/admin
+  artifacts:
+    paths:
+      - build.tar.gz
+    expire_in: 1h
